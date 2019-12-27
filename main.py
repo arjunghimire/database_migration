@@ -30,6 +30,17 @@ def connect_access():
   acursor = acon.cursor()
   return acursor,acon
 
+
+def enum(x):
+  if x == "N":
+    return "n"
+  return "y"
+
+get_region_id = lambda val: list(filter(lambda i: i[1] == val, select_region_from_mysql()))[0][0]
+get_country_id = lambda val: list(filter(lambda i: i[1] == val, select_country_from_mysql()))[0][0]
+
+
+
 def select_region(): 
   acursor,acon = connect_access()
   acursor.execute("select * from ddtbl_HO_region;")
@@ -77,8 +88,6 @@ def select_country_from_mysql():
   mcon.close()
   return result
 
-get_region_id = lambda val: list(filter(lambda i: i[1] == val, select_region_from_mysql()))[0][0]
-get_country_id = lambda val: list(filter(lambda i: i[1] == val, select_country_from_mysql()))[0][0]
 
 def insert_country():
   mcursor,mcon  = connect_mysql()
@@ -114,9 +123,8 @@ def write_report_to_txt():
 def insert_report():
   mcursor,mcon  = connect_mysql()
   for data in read_report_from_txt()[:2]:
-    regions = mcursor.execute("""INSERT into opx_reports (re_company_name,re_project_name,re_deposit,re_format,	re_code,re_type,re_version,re_reported_resource_status,re_reserve_status,re_data,re_eia_esia_assessment,re_pdf_name,re_pdf,re_dropbox_link,re_url_name,re_value_chain_status,re_project_highest_resource_reserve_class_level,re_project_status,re_commodities,re_commodities_type_1,re_commodities_type_2,re_commodities_type_3,re_reported_commodity_price_usd,re_mineralisation_style) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (data[2],data[3],data[4],data[5],data[10],data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19],data[20],data[21],data[22],data[23],data[24],data[25],data[26],data[27],data[28],data[29]))
-    print(data,"\n")
-    print(data[8],'\n')
+    # regions = mcursor.execute("""INSERT into opx_reports (re_company_name,re_project_name,re_deposit,re_format,	re_code,re_type,re_version,re_reported_resource_status,re_reserve_status,re_data,re_eia_esia_assessment,re_pdf_name,re_pdf,re_dropbox_link,re_url_name,re_value_chain_status,re_project_highest_resource_reserve_class_level,re_project_status,re_commodities,re_commodities_type_1,re_commodities_type_2,re_commodities_type_3,re_reported_commodity_price_usd,re_mineralisation_style,re_country_id,re_state,re_latitude,re_longitude,re_decimal_lattitude,re_decimal_longitude,re_latlon_id,re_overall_report_qp,re_overall_report_qp_affiliation,re_resource_qp,re_resource_qp_affiliation,re_reserve_qp,re_reserve_qp_affiliation,re_combined_cp_qp,re_highlights,re_deposit_resources,re_summary,re_metres_drilled_in_report,re_total_meter_drilled,re_start_date_drill_programme,re_total_meters_in_programme,re_full_drill_data_available,re_resource_estimation_technique,re_resource_estimation_technique_2,re_geo_modelling_software,re_estimation_software,re_other_software,re_notes_on_software_leapfrog,re_implicit_modelling,re_dynamic_anisotrophy,re_dynamic_search,re_rotating_anisotropy,re_unfolding,re_uniform_conditioning,re_notes,re_table_1_present_jorc,re_supporting_cautionary_statements,re_cp_qp_statement,re_independent_qp_n143_101,re_unique_code) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""", (data[2],data[3],data[4],data[5],data[10],data[11],data[12],data[13],data[14],data[15],data[16],data[17],data[18],data[19],data[20],data[21],data[22],data[23],data[24],data[25],data[26],data[27],data[28],data[29],get_country_id(data[31]),data[30],data[33],data[34],data[35],data[36],data[37],data[38],data[39],data[40],data[41],data[42],data[43],data[44],data[45],data[46],data[47],data[48],data[49],data[50],data[51],data[52],data[53],data[54],data[55],data[56],data[57],data[58],enum(data[59]),enum(data[60]),enum(data[61]),enum(data[62]),enum(data[63]),enum(data[64]),data[65],enum(data[66]),enum(data[67]),enum(data[68]),enum(data[69]),data[70]))
+    print(data[71],"\n")
   mcon.commit()
 
 
