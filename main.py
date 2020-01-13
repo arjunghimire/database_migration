@@ -14,11 +14,11 @@ def connect_mysql():
 def connect_access(): 
   db_path = "/home/arjun/all.accdb"
   ucanaccess_jars = [
-      "/home/arjun/Downloads/JDBC/UCanAccess/ucanaccess-4.0.4.jar",
-      "/home/arjun/Downloads/JDBC/UCanAccess/lib/commons-lang-2.6.jar",
-      "/home/arjun/Downloads/JDBC/UCanAccess/lib/commons-logging-1.1.3.jar",
-      "/home/arjun/Downloads/JDBC/UCanAccess/lib/hsqldb.jar",
-      "/home/arjun/Downloads/JDBC/UCanAccess/lib/jackcess-2.1.11.jar",
+      "JDBC/UCanAccess/ucanaccess-4.0.4.jar",
+      "JDBC/UCanAccess/lib/commons-lang-2.6.jar",
+      "JDBC/UCanAccess/lib/commons-logging-1.1.3.jar",
+      "JDBC/UCanAccess/lib/hsqldb.jar",
+      "JDBC/UCanAccess/lib/jackcess-2.1.11.jar",
       ]
   classpath = ":".join(ucanaccess_jars)
   acon = jaydebeapi.connect(
